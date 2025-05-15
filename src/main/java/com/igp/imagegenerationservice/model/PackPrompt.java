@@ -8,6 +8,8 @@ import java.util.UUID;
  * @author Achintha Kalunayaka
  * @since 5/15/2025
  */
+
+@Entity
 public class PackPrompt {
 
     @Id

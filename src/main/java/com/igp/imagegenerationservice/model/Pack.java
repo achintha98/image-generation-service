@@ -1,9 +1,6 @@
 package com.igp.imagegenerationservice.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +9,8 @@ import java.util.UUID;
  * @author Achintha Kalunayaka
  * @since 5/15/2025
  */
+
+@Entity
 public class Pack {
 
     @Id

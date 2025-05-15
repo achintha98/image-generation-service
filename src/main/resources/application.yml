@@ -2,7 +2,7 @@ spring:
   application:
     name: image-generation-service
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/igp}
+    url: jdbc:postgresql://localhost:5432/igp
     username: postgres
     password: password
   jpa:

@@ -1,11 +1,9 @@
 package com.igp.imagegenerationservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -14,6 +12,7 @@ import java.util.UUID;
  */
 
 @Entity
+@Table(name = "users") // ✅ avoid reserved keyword
 public class User {
 
     @Id
@@ -24,4 +23,8 @@ public class User {
     private String userName;
 
     private String profilePicture;
+
+    private LocalDate createAt;
+
+    private LocalDate updateAt;
 }

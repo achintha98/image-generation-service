@@ -2,6 +2,7 @@ package com.igp.imagegenerationservice.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -21,4 +22,10 @@ public class OutputImage {
     @ManyToOne
     @JoinColumn(name = "model_id", referencedColumnName = "id", nullable = false)
     private Model model;
+
+    private String userId;
+
+    private LocalDate createAt;
+
+    private LocalDate updateAt;
 }

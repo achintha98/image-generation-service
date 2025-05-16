@@ -4,6 +4,10 @@ import com.igp.imagegenerationservice.model.enums.EyeColor;
 import com.igp.imagegenerationservice.model.enums.Type;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +18,10 @@ import java.util.UUID;
  */
 
 @Entity
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Model {
 
     @Id
@@ -23,8 +31,13 @@ public class Model {
     @NotNull
     private String name;
 
+    @NotNull
+    private int age;
+
     @Enumerated(EnumType.STRING)
     private Type type;
+
+    private String ethnicity;
 
     @Enumerated(EnumType.STRING)
     private EyeColor eyeColor;

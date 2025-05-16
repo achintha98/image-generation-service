@@ -1,7 +1,10 @@
 package com.igp.imagegenerationservice.controller;
 
-import com.igp.imagegenerationservice.dto.ImageRequestDTO;
-import com.igp.imagegenerationservice.dto.ImageResponseDTO;
+import com.igp.imagegenerationservice.dto.ModelRequestDTO;
+import com.igp.imagegenerationservice.dto.ModelResponseDTO;
+import com.igp.imagegenerationservice.service.ModelService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +18,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/")
 public class ModelController {
 
+    private final ModelService modelService;
+
+    public ModelController(ModelService modelService) {
+        this.modelService = modelService;
+    }
+
     @PostMapping (path = "ai/training")
-    public ResponseEntity<ImageResponseDTO> createModel(@Validated @RequestBody ImageRequestDTO imageRequestDTO) {
-        String msg = "Hello World";
-        ImageResponseDTO imageResponseDTO = new ImageResponseDTO();
-        imageResponseDTO.setResponseMessage(msg);
-        return ResponseEntity.ok().body(imageResponseDTO);
+    public ResponseEntity<ModelResponseDTO> createModel(@Validated @RequestBody ModelRequestDTO modelRequestDTO) {
+        ModelResponseDTO modelResponseDTO = modelService.createModel(modelRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(modelResponseDTO);
     }
 }

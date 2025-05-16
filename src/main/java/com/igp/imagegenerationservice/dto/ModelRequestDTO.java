@@ -4,20 +4,17 @@ import com.igp.imagegenerationservice.model.OutputImage;
 import com.igp.imagegenerationservice.model.TrainingImage;
 import com.igp.imagegenerationservice.model.enums.EyeColor;
 import com.igp.imagegenerationservice.model.enums.Type;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Achintha Kalunayaka
  * @since 5/16/2025
  */
-public class ImageRequestDTO {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private UUID id;
+@Data
+public class ModelRequestDTO {
 
     @NotNull
     private String name;

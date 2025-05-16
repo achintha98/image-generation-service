@@ -1,10 +1,10 @@
 package com.igp.imagegenerationservice.controller;
 
+import com.igp.imagegenerationservice.dto.ImageRequestDTO;
 import com.igp.imagegenerationservice.dto.ImageResponseDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Achintha Kalunayaka
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/")
-public class ImageGenerationController {
+public class ModelController {
 
-    @GetMapping
-    public ResponseEntity<ImageResponseDTO> getImages() {
+    @PostMapping (path = "ai/training")
+    public ResponseEntity<ImageResponseDTO> createModel(@Validated @RequestBody ImageRequestDTO imageRequestDTO) {
         String msg = "Hello World";
         ImageResponseDTO imageResponseDTO = new ImageResponseDTO();
         imageResponseDTO.setResponseMessage(msg);

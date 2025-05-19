@@ -37,6 +37,8 @@ public class Model {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    private String userId;
+
     private String ethnicity;
 
     @Enumerated(EnumType.STRING)

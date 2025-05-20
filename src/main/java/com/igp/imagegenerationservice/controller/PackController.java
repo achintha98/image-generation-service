@@ -1,13 +1,11 @@
 package com.igp.imagegenerationservice.controller;
 
-import com.igp.imagegenerationservice.dto.ModelRequestDTO;
-import com.igp.imagegenerationservice.dto.ModelResponseDTO;
 import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
+import com.igp.imagegenerationservice.dto.PackResponseDTO;
 import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.service.PackService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +32,14 @@ public class PackController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(outputImageResponseDTO);
+    }
+
+    //TODO: need to lazy load PackPrompt list in packs and need to add pagination in here instead of loading everything by findAll()
+    @GetMapping(path = "/pack/bulk")
+    public ResponseEntity<List<PackResponseDTO>> getAllPacks() {
+        List<PackResponseDTO> packResponseDTO = packService.retrieveAllPacks();
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(packResponseDTO);
     }
 }

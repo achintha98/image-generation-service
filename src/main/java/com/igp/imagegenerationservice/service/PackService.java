@@ -1,12 +1,10 @@
 package com.igp.imagegenerationservice.service;
 
-import com.igp.imagegenerationservice.dto.ModelRequestDTO;
-import com.igp.imagegenerationservice.dto.ModelResponseDTO;
-import com.igp.imagegenerationservice.dto.OutputImageRequestDTO;
-import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
+import com.igp.imagegenerationservice.dto.*;
 import com.igp.imagegenerationservice.exception.PackNotFoundException;
 import com.igp.imagegenerationservice.mapper.ModelMapper;
 import com.igp.imagegenerationservice.mapper.OutputImageMapper;
+import com.igp.imagegenerationservice.mapper.PackMapper;
 import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.model.OutputImage;
 import com.igp.imagegenerationservice.model.Pack;
@@ -59,5 +57,10 @@ public class PackService {
                             return OutputImageMapper.mapToOutputImageResponseDTO(outputImage); // returns 1 DTO
                         }).toList();
         return outputImageResponseDTOList;
+    }
+
+    public List<PackResponseDTO> retrieveAllPacks() {
+        List<Pack> packsList = packRepository.findAll();
+        return packsList.stream().map(pack -> PackMapper.mapToPackResponseDTO(pack)).toList();
     }
 }

@@ -1,6 +1,7 @@
 package com.igp.imagegenerationservice.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
  */
 
 @Entity
+@Data
 public class Pack {
 
     @Id

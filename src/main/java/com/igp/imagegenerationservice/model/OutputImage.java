@@ -1,6 +1,10 @@
 package com.igp.imagegenerationservice.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,6 +15,10 @@ import java.util.UUID;
  */
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OutputImage {
 
     @Id
@@ -24,6 +32,8 @@ public class OutputImage {
     private Model model;
 
     private String userId;
+
+    private String prompt;
 
     private LocalDate createAt;
 

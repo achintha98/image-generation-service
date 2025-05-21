@@ -35,6 +35,8 @@ public class OutputImage {
 
     private String prompt;
 
+    private String aiRequestId;
+
     private LocalDate createAt;
 
     private LocalDate updateAt;

@@ -1,11 +1,12 @@
 package com.igp.imagegenerationservice.service;
 
+import ai.fal.client.Output;
+import com.google.gson.JsonObject;
 import com.igp.imagegenerationservice.dto.ModelRequestDTO;
 import com.igp.imagegenerationservice.dto.ModelResponseDTO;
 import com.igp.imagegenerationservice.mapper.ModelMapper;
 import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.repository.ModelRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,6 +26,11 @@ public class ModelService {
 
     public ModelResponseDTO createModel(ModelRequestDTO modelRequestDTO) {
         Model model = modelRepository.save(ModelMapper.mapFromModelRequestDTO(modelRequestDTO));
+        return ModelMapper.mapToModelResponseDTO(model);
+    }
+
+    public ModelResponseDTO updateModel(Output<JsonObject> objectOutput) {
+        Model model = modelRepository.findByAiRequestId(objectOutput.getRequestId());
         return ModelMapper.mapToModelResponseDTO(model);
     }
 }

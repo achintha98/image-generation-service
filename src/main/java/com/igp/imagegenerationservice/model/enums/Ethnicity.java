@@ -6,7 +6,7 @@ package com.igp.imagegenerationservice.model.enums;
  */
 
 
-public enum Type {
+public enum Ethnicity {
     WHITE,
     BLACK,
     ASIANAMERICAN,

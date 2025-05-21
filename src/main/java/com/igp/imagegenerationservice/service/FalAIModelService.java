@@ -37,15 +37,17 @@ public class FalAIModelService implements BaseModelService{
                         .build()
         );
 
+        var result = fal.queue().result("fal-ai/flux-lora", QueueResultOptions
+                .withRequestId("764cabcf-b745-4b3e-ae38-1200304cf45b"));
 
     }
 
     @Override
-    public void trainImage(String zipURL, String triggerWord) {
+    public void trainModel(String zipURL, String triggerWord) {
         var fal = FalClient.withEnvCredentials();
 
         var input = Map.of(
-                "images_data_url", ""
+                "images_data_url", zipURL
         );
         var job = fal.queue().submit("fal-ai/flux-lora-fast-training",
                 QueueSubmitOptions.<JsonObject>builder()

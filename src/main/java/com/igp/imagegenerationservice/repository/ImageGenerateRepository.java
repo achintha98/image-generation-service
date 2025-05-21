@@ -13,4 +13,5 @@ import java.util.UUID;
 
 @Repository
 public interface ImageGenerateRepository extends JpaRepository<OutputImage, UUID> {
+    OutputImage findByAiRequestId(String aiRequestId);
 }

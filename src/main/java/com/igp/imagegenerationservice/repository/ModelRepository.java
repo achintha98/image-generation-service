@@ -10,4 +10,5 @@ import java.util.UUID;
  * @since 5/16/2025
  */
 public interface ModelRepository extends JpaRepository<Model, UUID> {
+    Model findByAiRequestId(String aiRequestId);
 }

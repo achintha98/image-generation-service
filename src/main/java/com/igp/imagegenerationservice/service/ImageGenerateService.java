@@ -1,5 +1,7 @@
 package com.igp.imagegenerationservice.service;
 
+import ai.fal.client.Output;
+import com.google.gson.JsonObject;
 import com.igp.imagegenerationservice.dto.OutputImageRequestDTO;
 import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
 import com.igp.imagegenerationservice.mapper.OutputImageMapper;
@@ -21,9 +23,13 @@ public class ImageGenerateService {
         this.imageGenerateRepository = imageGenerateRepository;
     }
 
-    public OutputImageResponseDTO createModel(OutputImageRequestDTO outputImageRequestDTO) {
+    public OutputImageResponseDTO generateImage(OutputImageRequestDTO outputImageRequestDTO) {
         OutputImage outputImage = imageGenerateRepository.save(OutputImageMapper.mapFromOutputImageRequestDTO(outputImageRequestDTO));
         return OutputImageMapper.mapToOutputImageResponseDTO(outputImage);
     }
 
+    public OutputImageResponseDTO updateImage(Output<JsonObject> objectOutput) {
+        OutputImage outputImage = imageGenerateRepository.findByAiRequestId(objectOutput.getRequestId());
+        return OutputImageMapper.mapToOutputImageResponseDTO(outputImage);
+    }
 }

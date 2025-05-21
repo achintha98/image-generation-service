@@ -3,7 +3,7 @@ package com.igp.imagegenerationservice.dto;
 import com.igp.imagegenerationservice.model.OutputImage;
 import com.igp.imagegenerationservice.model.TrainingImage;
 import com.igp.imagegenerationservice.model.enums.EyeColor;
-import com.igp.imagegenerationservice.model.enums.Type;
+import com.igp.imagegenerationservice.model.enums.Ethnicity;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ public class ModelRequestDTO {
 
     private String ethnicity;
 
-    private Type type;
+    private Ethnicity type;
 
     private EyeColor eyeColor;
 

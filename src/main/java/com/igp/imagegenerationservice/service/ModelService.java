@@ -5,6 +5,7 @@ import com.igp.imagegenerationservice.dto.ModelResponseDTO;
 import com.igp.imagegenerationservice.mapper.ModelMapper;
 import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.repository.ModelRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ModelService {
+
 
     private final ModelRepository modelRepository;
 

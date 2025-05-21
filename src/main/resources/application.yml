@@ -13,3 +13,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8080
+
+fal-ai:
+  webhook-url: http://localhost:8080/fal-ai/webhook

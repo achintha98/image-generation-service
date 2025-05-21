@@ -7,6 +7,6 @@ package com.igp.imagegenerationservice.service;
 public interface BaseModelService {
 
     void generateImage(String prompt, String tensorPath);
-    void trainImage(String[] images, String triggerWord);
+    void trainImage(String zipURL, String triggerWord);
 
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
  */
 
 @Entity
-@Data
 public class Pack {
 
     @Id
@@ -23,4 +22,28 @@ public class Pack {
 
     @OneToMany(mappedBy = "pack")
     private List<PackPrompt> packPromptList;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<PackPrompt> getPackPromptList() {
+        return packPromptList;
+    }
+
+    public void setPackPromptList(List<PackPrompt> packPromptList) {
+        this.packPromptList = packPromptList;
+    }
 }

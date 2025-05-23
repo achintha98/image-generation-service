@@ -1,8 +1,10 @@
 package com.igp.imagegenerationservice.dto;
 
 import com.igp.imagegenerationservice.model.Model;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -11,6 +13,8 @@ import java.time.LocalDate;
  * @since 5/20/2025
  */
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 public class OutputImageRequestDTO {

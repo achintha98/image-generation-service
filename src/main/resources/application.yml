@@ -16,3 +16,7 @@ server:
 
 fal-ai:
   webhook-url: http://localhost:8080/fal-ai/webhook
+access-key: ${access-key}
+secret-key: ${secret-key}
+bucket-name: ${bucket-name}
+endpoint: ${endpoint}

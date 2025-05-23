@@ -2,6 +2,7 @@ package com.igp.imagegenerationservice.dto;
 
 import com.igp.imagegenerationservice.model.enums.EyeColor;
 import com.igp.imagegenerationservice.model.enums.Ethnicity;
+import com.igp.imagegenerationservice.model.enums.Gender;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +23,9 @@ public class ModelResponseDTO {
 
     private int age;
 
-    private String ethnicity;
+    private Ethnicity ethnicity;
 
-    private Ethnicity type;
+    private Gender gender;
 
     private EyeColor eyeColor;
 

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ModelService {
 
-
     private final ModelRepository modelRepository;
 
     public ModelService(ModelRepository modelRepository) {
@@ -33,4 +32,5 @@ public class ModelService {
         Model model = modelRepository.findByAiRequestId(objectOutput.getRequestId());
         return ModelMapper.mapToModelResponseDTO(model);
     }
+
 }

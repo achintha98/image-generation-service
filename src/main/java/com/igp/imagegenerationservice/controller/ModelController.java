@@ -4,6 +4,7 @@ import com.igp.imagegenerationservice.dto.ModelRequestDTO;
 import com.igp.imagegenerationservice.dto.ModelResponseDTO;
 import com.igp.imagegenerationservice.dto.OutputImageRequestDTO;
 import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
+import com.igp.imagegenerationservice.service.CloudService;
 import com.igp.imagegenerationservice.service.ImageGenerateService;
 import com.igp.imagegenerationservice.service.ModelService;
 import org.springframework.http.HttpStatus;
@@ -21,11 +22,14 @@ import org.springframework.web.bind.annotation.*;
 public class ModelController {
 
     private final ModelService modelService;
+
+    private final CloudService cloudService;
     private final ImageGenerateService imageGenerateService;
 
-    public ModelController(ModelService modelService, ImageGenerateService imageGenerateService) {
+    public ModelController(ModelService modelService, ImageGenerateService imageGenerateService, CloudService cloudService) {
         this.imageGenerateService = imageGenerateService;
         this.modelService = modelService;
+        this.cloudService = cloudService;
     }
 
     @PostMapping (path = "ai/training")
@@ -38,5 +42,11 @@ public class ModelController {
     public ResponseEntity<OutputImageResponseDTO> generateImage(@Validated @RequestBody OutputImageRequestDTO outputImageRequestDTO) {
         OutputImageResponseDTO outputImageResponseDTO = imageGenerateService.generateImage(outputImageRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(outputImageResponseDTO);
+    }
+
+    @PutMapping (path = "ai/presign-url")
+    public ResponseEntity<String> getPreSignURL() {
+        String preSignUrl = cloudService.createPreSignUrl();
+        return ResponseEntity.status(HttpStatus.OK).body(preSignUrl);
     }
 }

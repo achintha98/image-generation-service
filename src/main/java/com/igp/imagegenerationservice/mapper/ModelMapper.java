@@ -14,11 +14,11 @@ public class ModelMapper {
     public static ModelResponseDTO mapToModelResponseDTO(Model model) {
         return ModelResponseDTO.builder().
                 id(model.getId().toString()).name(model.getName()).
-                age(model.getAge()).type(model.getType()).
+                age(model.getAge()).gender(model.getGender()).
                 ethnicity(model.getEthnicity()).eyeColor(model.getEyeColor()).build();
     }
 
     public static Model mapFromModelRequestDTO(ModelRequestDTO modelRequestDTO) {
         return Model.builder().name(modelRequestDTO.getName()).
-                eyeColor(modelRequestDTO.getEyeColor()).isBald(modelRequestDTO.isBald()).type(modelRequestDTO.getType()).build();    }
+                eyeColor(modelRequestDTO.getEyeColor()).isBald(modelRequestDTO.isBald()).gender(modelRequestDTO.getGender()).build();    }
 }

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 
 /**
  * @author Achintha Kalunayaka
@@ -46,8 +47,8 @@ public class ModelController {
     }
 
     @PutMapping (path = "ai/presign-url")
-    public ResponseEntity<String> getPreSignURL() {
-        String preSignUrl = cloudService.createPreSignUrl();
+    public ResponseEntity<PresignedPutObjectRequest> getPreSignURL() {
+        PresignedPutObjectRequest preSignUrl = cloudService.createPreSignUrl();
         return ResponseEntity.status(HttpStatus.OK).body(preSignUrl);
     }
 }

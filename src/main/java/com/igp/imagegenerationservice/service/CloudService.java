@@ -3,6 +3,7 @@ package com.igp.imagegenerationservice.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -41,7 +42,7 @@ public class CloudService {
     @Value("${endpoint}")
     private String endpoint;
 
-    public String createPreSignUrl() {
+    public PresignedPutObjectRequest createPreSignUrl() {
 
         try {
             S3Presigner preSigner = S3Presigner.builder()
@@ -65,7 +66,7 @@ public class CloudService {
             logger.info("Presigned URL to upload a file to: [{}]", myURL);
             logger.info("HTTP method: [{}]", presignedRequest.httpRequest().method());
 
-            return presignedRequest.url().toExternalForm();
+            return presignedRequest;
         }
     catch(Exception ex) {
         logger.error(ex.getMessage());

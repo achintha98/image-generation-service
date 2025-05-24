@@ -11,8 +11,6 @@ import lombok.Data;
 @Data
 @Builder
 public class PreSignResponseDTO {
-
     private String key;
     private String responseURL;
-
 }

@@ -1,9 +1,6 @@
 package com.igp.imagegenerationservice.controller;
 
-import com.igp.imagegenerationservice.dto.ModelRequestDTO;
-import com.igp.imagegenerationservice.dto.ModelResponseDTO;
-import com.igp.imagegenerationservice.dto.OutputImageRequestDTO;
-import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
+import com.igp.imagegenerationservice.dto.*;
 import com.igp.imagegenerationservice.service.CloudService;
 import com.igp.imagegenerationservice.service.ImageGenerateService;
 import com.igp.imagegenerationservice.service.ModelService;
@@ -47,8 +44,8 @@ public class ModelController {
     }
 
     @PutMapping (path = "ai/presign-url")
-    public ResponseEntity<PresignedPutObjectRequest> getPreSignURL() {
-        PresignedPutObjectRequest preSignUrl = cloudService.createPreSignUrl();
-        return ResponseEntity.status(HttpStatus.OK).body(preSignUrl);
+    public ResponseEntity<PreSignResponseDTO> getPreSignURL() {
+        PreSignResponseDTO preSignResponse = cloudService.createPreSignUrl();
+        return ResponseEntity.status(HttpStatus.OK).body(preSignResponse);
     }
 }

@@ -1,9 +1,10 @@
 package com.igp.imagegenerationservice.service;
 
+import com.igp.imagegenerationservice.dto.PreSignResponseDTO;
+import com.igp.imagegenerationservice.mapper.CloudServiceMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -42,7 +43,7 @@ public class CloudService {
     @Value("${endpoint}")
     private String endpoint;
 
-    public PresignedPutObjectRequest createPreSignUrl() {
+    public PreSignResponseDTO createPreSignUrl() {
 
         try {
             S3Presigner preSigner = S3Presigner.builder()
@@ -55,6 +56,7 @@ public class CloudService {
                     .bucket(bucketName)
                     .key("models"+ LocalDate.now() + Math.random() + ".zip")
                     .build();
+            String zipFileName = objectRequest.key();
 
             PutObjectPresignRequest presignRequest = PutObjectPresignRequest.builder()
                     .signatureDuration(Duration.ofMinutes(10))  // The URL expires in 10 minutes.
@@ -65,8 +67,8 @@ public class CloudService {
             String myURL = presignedRequest.url().toString();
             logger.info("Presigned URL to upload a file to: [{}]", myURL);
             logger.info("HTTP method: [{}]", presignedRequest.httpRequest().method());
-
-            return presignedRequest;
+            String preSignURL = presignedRequest.url().toExternalForm();
+            return CloudServiceMapper.mapToPreSignURLResponseDTO(zipFileName, preSignURL);
         }
     catch(Exception ex) {
         logger.error(ex.getMessage());

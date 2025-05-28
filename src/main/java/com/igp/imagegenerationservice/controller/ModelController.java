@@ -6,6 +6,8 @@ import com.igp.imagegenerationservice.service.ImageGenerateService;
 import com.igp.imagegenerationservice.service.ModelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
@@ -32,7 +34,10 @@ public class ModelController {
     }
 
     @PostMapping (path = "ai/training")
-    public ResponseEntity<ModelResponseDTO> createModel(@Validated @RequestBody ModelRequestDTO modelRequestDTO) {
+    public ResponseEntity<ModelResponseDTO> createModel(@Validated @AuthenticationPrincipal Jwt jwt, @RequestBody ModelRequestDTO modelRequestDTO) {
+        String clerkUserId = jwt.getSubject(); // e.g. user_xxx
+        String email = jwt.getClaimAsString("email");
+
         ModelResponseDTO modelResponseDTO = modelService.createModel(modelRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(modelResponseDTO);
     }

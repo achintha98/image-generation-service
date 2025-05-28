@@ -30,6 +30,8 @@ public class ModelRequestDTO {
 
     private boolean isBald;
 
+    private String userId;
+
     private List<OutputImage> outputImageList;
 
     private List<TrainingImage> trainingImageList;

@@ -20,5 +20,5 @@ public class ModelMapper {
 
     public static Model mapFromModelRequestDTO(ModelRequestDTO modelRequestDTO) {
         return Model.builder().name(modelRequestDTO.getName()).
-                eyeColor(modelRequestDTO.getEyeColor()).isBald(modelRequestDTO.isBald()).gender(modelRequestDTO.getGender()).build();    }
+                eyeColor(modelRequestDTO.getEyeColor()).isBald(modelRequestDTO.isBald()).gender(modelRequestDTO.getGender()).userId(modelRequestDTO.getUserId()).build();}
 }

@@ -35,9 +35,8 @@ public class ModelController {
 
     @PostMapping (path = "ai/training")
     public ResponseEntity<ModelResponseDTO> createModel(@Validated @AuthenticationPrincipal Jwt jwt, @RequestBody ModelRequestDTO modelRequestDTO) {
-        String clerkUserId = jwt.getSubject(); // e.g. user_xxx
-        String email = jwt.getClaimAsString("email");
-
+        String clerkUserId = jwt.getSubject();
+        modelRequestDTO.setUserId(clerkUserId);
         ModelResponseDTO modelResponseDTO = modelService.createModel(modelRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(modelResponseDTO);
     }
@@ -48,7 +47,7 @@ public class ModelController {
         return ResponseEntity.status(HttpStatus.CREATED).body(outputImageResponseDTO);
     }
 
-    @PutMapping (path = "ai/presign-url")
+    @GetMapping (path = "ai/presign-url")
     public ResponseEntity<PreSignResponseDTO> getPreSignURL() {
         PreSignResponseDTO preSignResponse = cloudService.createPreSignUrl();
         return ResponseEntity.status(HttpStatus.OK).body(preSignResponse);

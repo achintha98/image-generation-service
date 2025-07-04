@@ -9,6 +9,8 @@ import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.repository.ModelRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Achintha Kalunayaka
  * @since 5/16/2025
@@ -31,6 +33,11 @@ public class ModelService {
     public ModelResponseDTO updateModel(Output<JsonObject> objectOutput) {
         Model model = modelRepository.findByAiRequestId(objectOutput.getRequestId());
         return ModelMapper.mapToModelResponseDTO(model);
+    }
+
+    public List<ModelResponseDTO> getModelList() {
+        List<Model> models = modelRepository.findByIsOpenTrue();
+        return models.stream().map(ModelMapper::mapToModelResponseDTO).toList();
     }
 
 }

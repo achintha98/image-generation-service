@@ -2,7 +2,7 @@ package com.igp.imagegenerationservice.controller;
 
 import com.igp.imagegenerationservice.dto.*;
 import com.igp.imagegenerationservice.service.CloudService;
-import com.igp.imagegenerationservice.service.ImageGenerateService;
+import com.igp.imagegenerationservice.service.ImageService;
 import com.igp.imagegenerationservice.service.ModelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
+
+import java.util.List;
 
 /**
  * @author Achintha Kalunayaka
@@ -25,10 +26,10 @@ public class ModelController {
     private final ModelService modelService;
 
     private final CloudService cloudService;
-    private final ImageGenerateService imageGenerateService;
+    private final ImageService imageService;
 
-    public ModelController(ModelService modelService, ImageGenerateService imageGenerateService, CloudService cloudService) {
-        this.imageGenerateService = imageGenerateService;
+    public ModelController(ModelService modelService, ImageService imageService, CloudService cloudService) {
+        this.imageService = imageService;
         this.modelService = modelService;
         this.cloudService = cloudService;
     }
@@ -43,7 +44,7 @@ public class ModelController {
 
     @PostMapping (path = "ai/generate")
     public ResponseEntity<OutputImageResponseDTO> generateImage(@Validated @RequestBody OutputImageRequestDTO outputImageRequestDTO) {
-        OutputImageResponseDTO outputImageResponseDTO = imageGenerateService.generateImage(outputImageRequestDTO);
+        OutputImageResponseDTO outputImageResponseDTO = imageService.generateImage(outputImageRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(outputImageResponseDTO);
     }
 
@@ -51,5 +52,11 @@ public class ModelController {
     public ResponseEntity<PreSignResponseDTO> getPreSignURL() {
         PreSignResponseDTO preSignResponse = cloudService.createPreSignUrl();
         return ResponseEntity.status(HttpStatus.OK).body(preSignResponse);
+    }
+
+    @GetMapping (path = "ai/models")
+    public ResponseEntity<List<ModelResponseDTO>> getModelList() {
+        List<ModelResponseDTO> modelList = modelService.getModelList();
+        return ResponseEntity.status(HttpStatus.OK).body(modelList);
     }
 }

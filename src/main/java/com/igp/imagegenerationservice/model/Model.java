@@ -65,6 +65,8 @@ public class Model {
 
     private LocalDate updateAt;
 
+    private Boolean isOpen;
+
     @OneToMany(mappedBy = "model")
     private List<OutputImage> outputImageList;
 

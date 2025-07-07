@@ -30,6 +30,10 @@ public class ModelRequestDTO {
 
     private boolean isBald;
 
+    private Boolean isOpen;
+
+    private String triggerWord;
+
     private String userId;
 
     private List<OutputImage> outputImageList;

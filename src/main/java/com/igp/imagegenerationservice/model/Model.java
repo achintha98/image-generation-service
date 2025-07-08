@@ -59,6 +59,8 @@ public class Model {
 
     private String triggerWord;
 
+    private String thumbnail;
+
     private String tensorPath;
 
     private LocalDate createAt;

@@ -34,6 +34,8 @@ public class ModelRequestDTO {
 
     private String triggerWord;
 
+    private String thumbnail;
+
     private String userId;
 
     private List<OutputImage> outputImageList;

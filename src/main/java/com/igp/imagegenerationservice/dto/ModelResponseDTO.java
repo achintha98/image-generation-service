@@ -27,6 +27,8 @@ public class ModelResponseDTO {
 
     private Gender gender;
 
+    private String thumbnail;
+
     private EyeColor eyeColor;
 
     private boolean isBald;

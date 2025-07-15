@@ -5,7 +5,7 @@ package com.igp.imagegenerationservice.model.enums;
  * @since 5/21/2025
  */
 public enum Gender {
-    Man,
-    Woman,
-    Others
+    Male,
+    Female,
+    Other
 }

@@ -7,13 +7,13 @@ package com.igp.imagegenerationservice.model.enums;
 
 
 public enum Ethnicity {
-    WHITE,
-    BLACK,
-    ASIANAMERICAN,
-    EASTASIAN,
-    SOUTHEASTASIAN,
-    SOUTHASIAN,
-    MIDDLEEASTERN,
-    PACIFIC,
-    HISPANIC
+    White,
+    Black,
+    AsiaAmerican,
+    EastAsian,
+    SouthEastAsian,
+    SouthAsian,
+    MiddleEastern,
+    Pacific,
+    Hispanic
 }

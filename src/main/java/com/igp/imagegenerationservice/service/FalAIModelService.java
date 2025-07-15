@@ -5,6 +5,7 @@ import ai.fal.client.queue.*;
 
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import java.util.Map;
  * @author Achintha Kalunayaka
  * @since 5/19/2025
  */
+
+@Service
 public class FalAIModelService implements BaseModelService{
 
     @Value("${fal-ai.webhook-url}")
@@ -30,7 +33,7 @@ public class FalAIModelService implements BaseModelService{
         var input = Map.of(
                 "prompt", "Extreme close-up of a single tiger eye, direct frontal view. Detailed iris and pupil. Sharp focus on eye texture and color. Natural lighting to capture authentic eye shine and depth. The word \"FLUX\" is painted over it in big, white brush strokes with visible texture."
         );
-        var job = fal.queue().submit("fal-ai/flux-lora",
+        var job = fal.queue().submit("fal-ai/flux/dev",
                 QueueSubmitOptions.<JsonObject>builder()
                         .input(input)
                         .webhookUrl(falWebhookUrl)

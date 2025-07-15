@@ -19,5 +19,9 @@ public class PackResponseDTO {
 
     private String name;
 
+    private String description;
+
+    private String imageURL;
+
     private List<PackPrompt> packPromptList;
 }

@@ -11,7 +11,8 @@ import com.igp.imagegenerationservice.model.Pack;
  */
 public class PackMapper {
     public static PackResponseDTO mapToPackResponseDTO(Pack pack) {
-        return PackResponseDTO.builder().id(pack.getId()).name(pack.getName()).build();
+        return PackResponseDTO.builder().id(pack.getId()).name(pack.getName()).
+                description(pack.getDescription()).imageURL(pack.getImageURL()).build();
     }
 
 }

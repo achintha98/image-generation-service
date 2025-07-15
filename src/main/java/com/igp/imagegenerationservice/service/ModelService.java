@@ -26,7 +26,8 @@ public class ModelService {
     }
 
     public ModelResponseDTO createModel(ModelRequestDTO modelRequestDTO) {
-        Model model = modelRepository.save(ModelMapper.mapFromModelRequestDTO(modelRequestDTO));
+        Model model = ModelMapper.mapFromModelRequestDTO(modelRequestDTO);
+        modelRepository.save(model);
         return ModelMapper.mapToModelResponseDTO(model);
     }
 

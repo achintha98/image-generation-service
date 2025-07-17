@@ -36,6 +36,8 @@ public class ModelRequestDTO {
 
     private String thumbnail;
 
+    private String zipUrl;
+
     private String userId;
 
     private List<OutputImage> outputImageList;

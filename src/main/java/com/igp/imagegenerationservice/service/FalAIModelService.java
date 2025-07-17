@@ -4,15 +4,10 @@ import ai.fal.client.*;
 import ai.fal.client.queue.*;
 
 import com.google.gson.JsonObject;
-import com.igp.imagegenerationservice.model.FalRequest;
-import com.igp.imagegenerationservice.repository.FalModelRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.UUID;
 
 
 /**
@@ -23,68 +18,47 @@ import java.util.UUID;
 @Service
 public class FalAIModelService implements BaseModelService{
 
-    private static final Logger logger = LoggerFactory.getLogger(FalAIModelService.class);
-
     @Value("${fal-ai.webhook-url}")
     private String falWebhookUrl;
 
-    private FalModelRepository falModelRepository;
-
-    public FalAIModelService(FalModelRepository falModelRepository) {
-        this.falModelRepository = falModelRepository;
+    public FalAIModelService() {
+        super();
     }
 
     @Override
     public void generateImage(String prompt, String tensorPath) {
-        try {
-            var fal = FalClient.withEnvCredentials();
 
-            var input = Map.of(
-                    "prompt", prompt
-            );
-            var job = fal.queue().submit(tensorPath,
-                    QueueSubmitOptions.<JsonObject>builder()
-                            .input(input)
-                            .webhookUrl(falWebhookUrl + "fal-ai/webhook/generate")
-                            .build()
-            );
-            FalRequest falRequest = FalRequest.builder().requestId(UUID.fromString(job.getRequestId())).
-                    status("IN_QUEUE").modelName(tensorPath).build();
-            falModelRepository.save(falRequest);
-        }
-        catch (RuntimeException runtimeException) {
-            logger.error("Error connecting to fal.ai: {}", runtimeException.getMessage());
-        }
+        var fal = FalClient.withEnvCredentials();
+
+        var input = Map.of(
+                "prompt", "Extreme close-up of a single tiger eye, direct frontal view. Detailed iris and pupil. Sharp focus on eye texture and color. Natural lighting to capture authentic eye shine and depth. The word \"FLUX\" is painted over it in big, white brush strokes with visible texture."
+        );
+        var job = fal.queue().submit("fal-ai/flux/dev",
+                QueueSubmitOptions.<JsonObject>builder()
+                        .input(input)
+                        .webhookUrl(falWebhookUrl)
+                        .build()
+        );
+
+        var result = fal.queue().result("fal-ai/flux-lora", QueueResultOptions
+                .withRequestId("764cabcf-b745-4b3e-ae38-1200304cf45b"));
+
     }
 
     @Override
-    public Integer trainModel(String zipURL, String triggerWord) {
+    public void trainModel(String zipURL, String triggerWord) {
         var fal = FalClient.withEnvCredentials();
 
         var input = Map.of(
                 "images_data_url", zipURL
         );
-        return fal.queue().submit("fal-ai/flux-lora-fast-training",
+        var job = fal.queue().submit("fal-ai/flux-lora-fast-training",
                 QueueSubmitOptions.<JsonObject>builder()
                         .input(input)
                         .webhookUrl(falWebhookUrl)
                         .build()
-        ).getQueuePosition();
-    }
+        );
 
-    public String checkStatus(String requestId, String tensorPath) {
-        var fal = FalClient.withEnvCredentials();
-
-        return fal.queue().status(tensorPath, QueueStatusOptions
-                .withRequestId(requestId)).getStatus().toString();
-
-    }
-
-    public Map<String, ?> returnResults(String requestId, String tensorPath) {
-        var fal = FalClient.withEnvCredentials();
-
-        return fal.queue().result(tensorPath, QueueResultOptions
-                .withRequestId(requestId)).getData().asMap();
 
     }
 }

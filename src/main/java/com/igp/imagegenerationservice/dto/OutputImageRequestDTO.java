@@ -19,9 +19,15 @@ import java.time.LocalDate;
 @Builder
 public class OutputImageRequestDTO {
 
+    private String imageURL;
+
     private Model model;
 
     private String userId;
 
     private String prompt;
+
+    private LocalDate createAt;
+
+    private LocalDate updateAt;
 }

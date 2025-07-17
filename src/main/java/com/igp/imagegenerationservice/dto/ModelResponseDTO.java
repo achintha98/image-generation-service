@@ -7,8 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.UUID;
-
 /**
  * @author Achintha Kalunayaka
  * @since 5/15/2025
@@ -31,11 +29,7 @@ public class ModelResponseDTO {
 
     private String thumbnail;
 
-    private String zipUrl;
-
     private EyeColor eyeColor;
-
-    private Boolean isOpen;
 
     private boolean isBald;
 }

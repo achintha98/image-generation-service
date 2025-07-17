@@ -33,7 +33,6 @@ public class OutputImage {
 
     private String userId;
 
-    @Lob
     private String prompt;
 
     private String aiRequestId;

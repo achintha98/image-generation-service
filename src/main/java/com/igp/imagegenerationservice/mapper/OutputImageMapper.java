@@ -2,7 +2,6 @@ package com.igp.imagegenerationservice.mapper;
 
 import com.igp.imagegenerationservice.dto.OutputImageRequestDTO;
 import com.igp.imagegenerationservice.dto.OutputImageResponseDTO;
-import com.igp.imagegenerationservice.model.Model;
 import com.igp.imagegenerationservice.model.OutputImage;
 
 /**
@@ -17,9 +16,9 @@ public class OutputImageMapper {
                 model(outputImage.getModel()).imageURL(outputImage.getImageURL()).build();
     }
 
-    public static OutputImage mapFromOutputImageRequestDTO(String prompt, Model model) {
-        return OutputImage.builder().prompt(prompt).
-                model(model).build();
+    public static OutputImage mapFromOutputImageRequestDTO(OutputImageRequestDTO outputImageRequestDTO) {
+        return OutputImage.builder().prompt(outputImageRequestDTO.getPrompt()).
+                model(outputImageRequestDTO.getModel()).imageURL(outputImageRequestDTO.getImageURL()).build();
     }
 }
 

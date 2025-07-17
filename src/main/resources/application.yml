@@ -7,23 +7,16 @@ spring:
     password: password
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://curious-glider-64.clerk.accounts.dev
-
 server:
   port: 8080
 
 fal-ai:
-  webhook-url: https://c850508f55be.ngrok-free.app
+  webhook-url: http://localhost:8080/fal-ai/webhook
 access-key: ${access-key}
 secret-key: ${secret-key}
 bucket-name: ${bucket-name}
 endpoint: ${endpoint}
-

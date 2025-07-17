@@ -26,20 +26,20 @@ public class PackController {
         this.packService = packService;
     }
 
-//    @PostMapping(path = "/generate/{packId}")
-//    public ResponseEntity<List<OutputImageResponseDTO>> generatePackImages(@PathVariable UUID packId, @RequestBody Model model) {
-//        List<OutputImageResponseDTO> outputImageResponseDTO = packService.generatePack(packId, model);
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(outputImageResponseDTO);
-//    }
+    @PostMapping(path = "/generate/{packId}")
+    public ResponseEntity<List<OutputImageResponseDTO>> generatePackImages(@PathVariable UUID packId, @RequestBody Model model) {
+        List<OutputImageResponseDTO> outputImageResponseDTO = packService.generatePack(packId, model);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(outputImageResponseDTO);
+    }
 
     //TODO: need to lazy load PackPrompt list in packs and need to add pagination in here instead of loading everything by findAll()
-    @GetMapping(path = "/bulk")
+    @GetMapping(path = "/pack/bulk")
     public ResponseEntity<List<PackResponseDTO>> getAllPacks() {
         List<PackResponseDTO> packResponseDTO = packService.retrieveAllPacks();
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(packResponseDTO);
     }
 }

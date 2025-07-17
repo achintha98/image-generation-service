@@ -38,26 +38,26 @@ public class PackService {
         this.imageGenerateRepository = imageGenerateRepository;
     }
 
-//    public List<OutputImageResponseDTO> generatePack(UUID packId, Model model) {
-//        Pack existingPack = packRepository.findById(packId)
-//                .orElseThrow(() -> new PackNotFoundException("A Pack with given packId does not exist: " + packId));
-//        List<OutputImageResponseDTO> outputImageResponseDTOList =
-//                existingPack.getPackPromptList().stream()
-//                        .map(packPrompt -> {
-//                            OutputImageRequestDTO dto = OutputImageRequestDTO.builder()
-//                                    .imageURL("")
-//                                    .prompt(packPrompt.getPrompts())
-//                                    .model(model)
-//                                    .build();
-//
-//                            OutputImage outputImage = imageGenerateRepository.save(
-//                                    OutputImageMapper.mapFromOutputImageRequestDTO(dto)
-//                            );
-//
-//                            return OutputImageMapper.mapToOutputImageResponseDTO(outputImage); // returns 1 DTO
-//                        }).toList();
-//        return outputImageResponseDTOList;
-//    }
+    public List<OutputImageResponseDTO> generatePack(UUID packId, Model model) {
+        Pack existingPack = packRepository.findById(packId)
+                .orElseThrow(() -> new PackNotFoundException("A Pack with given packId does not exist: " + packId));
+        List<OutputImageResponseDTO> outputImageResponseDTOList =
+                existingPack.getPackPromptList().stream()
+                        .map(packPrompt -> {
+                            OutputImageRequestDTO dto = OutputImageRequestDTO.builder()
+                                    .imageURL("")
+                                    .prompt(packPrompt.getPrompts())
+                                    .model(model)
+                                    .build();
+
+                            OutputImage outputImage = imageGenerateRepository.save(
+                                    OutputImageMapper.mapFromOutputImageRequestDTO(dto)
+                            );
+
+                            return OutputImageMapper.mapToOutputImageResponseDTO(outputImage); // returns 1 DTO
+                        }).toList();
+        return outputImageResponseDTOList;
+    }
 
     public List<PackResponseDTO> retrieveAllPacks() {
         List<Pack> packsList = packRepository.findAll();

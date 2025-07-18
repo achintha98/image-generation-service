@@ -21,11 +21,21 @@ public class ModelService {
 
     private final ModelRepository modelRepository;
 
-    public ModelService(ModelRepository modelRepository) {
+    private final FalAIModelService falAIModelService;
+
+    public ModelService(ModelRepository modelRepository, FalAIModelService falAIModelService) {
         this.modelRepository = modelRepository;
+        this.falAIModelService = falAIModelService;
     }
 
     public ModelResponseDTO createModel(ModelRequestDTO modelRequestDTO) {
+        Model model = ModelMapper.mapFromModelRequestDTO(modelRequestDTO);
+        modelRepository.save(model);
+        falAIModelService.trainModel(model.getZipUrl(), model.getTriggerWord());
+        return ModelMapper.mapToModelResponseDTO(model);
+    }
+
+    public ModelResponseDTO createPublicModel(ModelRequestDTO modelRequestDTO) {
         Model model = ModelMapper.mapFromModelRequestDTO(modelRequestDTO);
         modelRepository.save(model);
         return ModelMapper.mapToModelResponseDTO(model);
@@ -35,7 +45,6 @@ public class ModelService {
         Model model = modelRepository.findByAiRequestId(objectOutput.getRequestId());
         return ModelMapper.mapToModelResponseDTO(model);
     }
-
     public List<ModelResponseDTO> getModelList() {
         List<Model> models = modelRepository.findByIsOpenTrue();
         return models.stream().map(ModelMapper::mapToModelResponseDTO).toList();

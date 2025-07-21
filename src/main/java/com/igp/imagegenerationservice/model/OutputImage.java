@@ -27,13 +27,14 @@ public class OutputImage {
 
     private String imageURL;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id", referencedColumnName = "id", nullable = false)
     private Model model;
 
     private String userId;
 
     @Lob
+    @Column(columnDefinition = "TEXT")
     private String prompt;
 
     private String aiRequestId;

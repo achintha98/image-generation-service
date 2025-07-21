@@ -35,7 +35,7 @@ public class FalAIModelService implements BaseModelService{
     }
 
     @Override
-    public void generateImage(String prompt, String tensorPath) {
+    public String  generateImage(String prompt, String tensorPath) {
         try {
             var fal = FalClient.withEnvCredentials();
 
@@ -51,9 +51,11 @@ public class FalAIModelService implements BaseModelService{
             FalRequest falRequest = FalRequest.builder().requestId(UUID.fromString(job.getRequestId())).
                     status("IN_QUEUE").modelName(tensorPath).build();
             falModelRepository.save(falRequest);
+            return job.getRequestId();
         }
         catch (RuntimeException runtimeException) {
             logger.error("Error connecting to fal.ai: {}", runtimeException.getMessage());
+            throw new RuntimeException("Error connecting to fal.ai");
         }
     }
 
